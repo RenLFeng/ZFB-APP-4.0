@@ -1,0 +1,11 @@
+*.log*
+.cache
+.DS_Store
+.idea
+.vscode
+node_modules
+yarn.lock
+
+base/dist/
+base/docs/
+docs/
