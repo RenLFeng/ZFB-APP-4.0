@@ -1,12 +1,27 @@
 <template>
 <div class=''>
    
-    <button @click="login()">login</button>
+    <button @click="login()"></button>
 </div>
 </template>
 
 <script>
 import { Button } from 'vant';
+import CryptoJS from '../libs/utils'
+
+
+let  data = {
+          useraccount: '13798367807',
+          loginPwd: 'qqq111',
+          loginType: 1
+}
+let str='Cr'
+let encryptdata=CryptoJS.encrypt(JSON.stringify(data))
+console.log(encryptdata);
+let decryptdata=CryptoJS.decrypt(encryptdata);
+console.log(decryptdata);
+// let signaturedata=CryptoJS.signature(str);
+// console.log(signaturedata);
 export default {
 components: {
      [Button.name]: Button,
