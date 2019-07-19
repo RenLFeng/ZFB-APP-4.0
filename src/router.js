@@ -22,6 +22,7 @@ const routes = [
   },
   {
     meta: {
+<<<<<<< HEAD
       title: ''
     },
     path: '/home',
@@ -30,6 +31,8 @@ const routes = [
   },
   {
     meta: {
+=======
+>>>>>>> 0786b4f14e4e27676c2f2a28b50507eaa24e9dba
       title: '404'
     },
     path: '/*',
