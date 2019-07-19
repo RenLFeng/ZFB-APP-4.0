@@ -17,11 +17,21 @@ let  data = {
 }
 let str='Cr'
 let encryptdata=CryptoJS.encrypt(JSON.stringify(data))
-console.log(encryptdata);
+console.log('加密',encryptdata);
+
 let decryptdata=CryptoJS.decrypt(encryptdata);
-console.log(decryptdata);
-// let signaturedata=CryptoJS.signature(str);
-// console.log(signaturedata);
+console.log('解密',decryptdata);
+
+
+let signatureData=CryptoJS.signature(encryptdata);
+console.log('加签',signatureData);
+
+let verifyData=CryptoJS.verify(encryptdata,signatureData);
+console.log('验签',verifyData);
+
+
+
+
 export default {
 components: {
      [Button.name]: Button,
@@ -47,7 +57,7 @@ methods: {
       console.log('resresresres',res)
       if (res.retMsg == '成功') {
         localStorage.setItem('token', res.data.token)
-       alert(0)
+       this.$router.push('/home')
       }
     } catch (error) {
       console.log(error)

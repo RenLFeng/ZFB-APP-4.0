@@ -22,6 +22,14 @@ const routes = [
   },
   {
     meta: {
+      title: ''
+    },
+    path: '/home',
+    name:'home',
+    component: () => import('./views/Home.vue')
+  },
+  {
+    meta: {
       title: '404'
     },
     path: '/*',

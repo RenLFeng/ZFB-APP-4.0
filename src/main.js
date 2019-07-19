@@ -8,9 +8,10 @@ import vueTouch from './libs/vue-touch';
 import Calendar from 'vue-mobile-calendar'
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
-import Jsrsasign from 'jsrsasign'
-console.log(Jsrsasign);
-Vue.prototype.$jsrsasign = Jsrsasign
+import store from "./store";
+// import Jsrsasign from 'jsrsasign'
+// console.log(Jsrsasign);
+// Vue.prototype.$jsrsasign = Jsrsasign
 // import echarts from "echarts";
 // Vue.prototype.$echarts = echarts;
 Vue.prototype.api = Api; 
@@ -21,10 +22,10 @@ Vue.use(Lazyload);
 Vue.use(vueTouch);
 Vue.use(Calendar);
 Vue.use(Mint);
-Vue.use(Jsrsasign);
 import 'amfe-flexible';
 new Vue({
   router,
+    store,
   el: '#app',
   render: h => h(App)
 });
