@@ -38,5 +38,8 @@ module.exports = {
         return assetFilename.endsWith('.js');
       }
     }
+  },
+  devServer:{
+    port:8088
   }
 };

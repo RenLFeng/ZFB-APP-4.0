@@ -1,6 +1,7 @@
 import {Toast} from 'vant';
 const baseURL='http://test-app.sanzhongzhixiang.com';
 // const  baseURL='http://192.168.0.24:80';
+const that =this;
 export const get = ({ url, data }) =>
   new Promise((resolve, reject) => {
     const prefix = process.env.REACT_APP_HOST || baseURL
@@ -42,7 +43,7 @@ export const get = ({ url, data }) =>
     }
   })
 
-export const post = ({ url, data }) =>
+export const post = ({ url, data}) =>
   new Promise((resolve, reject) => {
     data = data || {}
     let prefix = process.env.REACT_APP_HOST || baseURL
@@ -60,7 +61,6 @@ export const post = ({ url, data }) =>
     if (process.env.NODE_ENV !== 'production') {
       client.setRequestHeader('token', token)
     }
-
     client.send(
       Object.keys(data)
         .map(key => `${key}=${data[key]}`)

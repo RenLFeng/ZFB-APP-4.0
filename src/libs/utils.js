@@ -29,7 +29,7 @@ let priK = "-----BEGIN PRIVATE KEY-----\n" +
 // 原文
 var src = "好厉害";
 import Vue from 'vue';
-import CryptoJS from 'crypto-js'
+import CryptoJS from 'crypto-js';
 export default {
   encrypt(word, keyStr,ivStr){ 
     keyStr = keyStr ? keyStr : 'talkingdata-2018';

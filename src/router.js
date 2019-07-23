@@ -22,11 +22,33 @@ const routes = [
   },
   {
     meta: {
-      title: ''
+      title: 'home'
     },
     path: '/home',
     name:'home',
     component: () => import('./views/Home.vue')
+  },
+  {
+    meta: {
+      title: 'CryptoJS'
+    },
+    path: '/CryptoJS',
+    component: () => import('./views/CryptoJS.vue')
+    // redirect: '/'
+  },
+  {
+    meta: {
+      title: '重置密码'
+    },
+    path: '/ForgetPwd',
+    component: () => import('./views/password/ForgetPwd.vue')
+  },
+  {
+    meta: {
+      title: '扫一扫'
+    },
+    path: '/scan',
+    component: () => import('./views/scan.vue')
   },
   {
     meta: {
