@@ -4,7 +4,7 @@
       <img class="logo" src="../assets/login_logo@3x.png" alt />
       <van-tabs v-model="active">
         <van-tab title="登录">
-          <van-cell-group>
+          <!-- <van-cell-group> -->
             <van-field
               v-model="loginData.username"
               clearable
@@ -19,13 +19,13 @@
               placeholder="请输入密码（6-16位字母与数字组合）"
               :left-icon="passwordIcon"
             />
-          </van-cell-group>
+          <!-- </van-cell-group> -->
           <van-button type="info" :class="isLogin?'btn_info act' :'btn_info'" @click="login()">登录</van-button>
-          <p class="Forget_psd" @click="Forget_psd">忘记密码</p>
+          <p class="Forget_psd" @click="ForgetPsd()">忘记密码</p>
         </van-tab>
 
         <van-tab title="注册">
-          <van-cell-group>
+          <!-- <van-cell-group> -->
             <van-field
               v-model="regData.username"
               clearable
@@ -65,13 +65,13 @@
               placeholder="请输入推荐码"
               :left-icon="usernameIcon"
               :right-icon="scanIcon"
-              @click-right-icon="openBarcodeCustom()"
+              @click-right-icon="scan()"
             />
-          </van-cell-group>
+          <!-- </van-cell-group> -->
           <p class="Agreement">
             <van-checkbox v-model="regData.checked">
               我已阅读并同意
-              <router-link to="home">《用户协议》</router-link>
+              <router-link to="index">《用户协议》</router-link>
             </van-checkbox>
           </p>
           <van-button type="info" :class="isReg?'btn_info act' :'btn_info'" click="login">注册</van-button>
@@ -102,22 +102,19 @@ export default {
   },
   data() {
     return {
-      loginState: false,
-      rsgState: false,
       loginData: {
-        username: "",
-        password: ""
+        username: '',
+        password: ''
       },
       regData: {
         checked: false,
-        username: "",
-        phoneCode: "",
-        password: "",
-        reppassword: "",
-        scanCode: window.sessionStorage.getItem('scanCode') || ''
+        username: '',
+        phoneCode: '',
+        password: '',
+        reppassword: '',
+        scanCode:''
       },
       active: 0,
-      show: false,
       phoneIcon: phoneIcon,
       passwordIcon: passwordIcon,
       scanIcon: scanIcon,
@@ -149,58 +146,60 @@ export default {
     }
   },
   watch: {
-        $route( to , from ){     
-              console.log( to , from )
-         }
   },
   methods: {
     getPCode() {
       alert("code");
     },
-    Forget_psd() {
+    ForgetPsd() {
       this.$router.push({
         path: "ForgetPwd",
         goBack: this.goBack
       });
     },
     scan() {
-      alert("sm");
+       this.$router.push({
+        path: "scan",
+      });
     },
     goBack() {
      
     },
-    login() {
-      alert(this.isLogin);
+    async login(){
+        if(!this.isLogin){
+            this.Toast('请将登录信息填写完整');
+            return;
+        }
+      try {
+      const res = await this.post({
+        url: this.api.login,
+        data: {
+          useraccount:this.loginData.username,
+          loginPwd: this.loginData.password,
+          loginType: 1
+        },
+      })
+      console.log('resresresres',res)
+      if (res.retMsg == '成功') {
+        localStorage.setItem('token', res.data.token);
+        this.Toast.success(res.retMsg);
+      }
+    } catch (error) {
+      console.log(error)
+    }
     },
     reg() {
       alert(this.isReg);
     },
-    openBarcodeCustom() {
-				createWithoutTitle("scan.html", {
-					titleNView: {
-						type: 'float',
-						backgroundColor: '#009DE2',
-						titleText: '扫一扫',
-						titleColor: '#FFFFFF',
-						autoBackButton: true
-					}
-				});
-			}
   },
-  created() {},
+  created() {
+      let scanCode=JSON.parse(window.sessionStorage.getItem('scanCode'));
+      if(scanCode){
+        this.active=scanCode.reg || 0;
+        this.regData.scanCode=scanCode.result || '';
+      }
+  },
   mounted() {
-            if (window.plus) {
-  plus.navigator.setStatusBarBackground("#009DE2");
-} else {
-  document.addEventListener(
-    "plusready",
-    function() {
-      plus.navigator.setStatusBarBackground("#009DE2");
-    },
-    false
-  );
-}
-// alert(window.sessionStorage.getItem('scanCode'))
   },
   beforeCreate() {},
   beforeMount() {},
@@ -218,19 +217,22 @@ export default {
     margin-bottom: 10px;
   }
   .title-iconBar {
+      .van-tab span{
+          font-size: 0.5rem;
+      }
     [class*="van-hairline"]::after {
       border: none;
     }
     margin: 2rem 0.5rem 0;
     text-align: center;
     img.logo {
-      width: 65%;
+      width: 60%;
     }
     .van-tabs__line {
       background-color: #0075c1;
     }
     .van-tabs__content {
-      margin-top: 1rem;
+      margin-top: 0.8rem;
     }
   }
   .Forget_psd {
@@ -247,5 +249,15 @@ export default {
       color: #0075c1;
     }
   }
+  .border{
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #666;
+      left: 0;
+      bottom: 0;
+  }
+
+
 }
 </style>

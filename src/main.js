@@ -10,7 +10,7 @@ import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import store from "./store";
 import {Toast} from 'vant';
-import '../public/public.css'
+import '../public/public.less'
 // import Jsrsasign from 'jsrsasign'
 // console.log(Jsrsasign);
 // Vue.prototype.$jsrsasign = Jsrsasign

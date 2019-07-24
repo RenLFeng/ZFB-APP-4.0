@@ -16,17 +16,17 @@ const routes = [
     meta: {
       title: '首页'
     },
-    path: '/index',
-    name:'index',
-    component: () => import('./views/index.vue')
+    path: '/home',
+    name:'home',
+    component: () => import('./views/home.vue')
   },
   {
     meta: {
       title: 'home'
     },
-    path: '/home',
-    name:'home',
-    component: () => import('./views/Home.vue')
+    path: '/x',
+    name:'x',
+    component: () => import('./views/x.vue')
   },
   {
     meta: {
