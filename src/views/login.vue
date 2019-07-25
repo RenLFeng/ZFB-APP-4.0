@@ -170,23 +170,26 @@ export default {
             this.Toast('请将登录信息填写完整');
             return;
         }
-      try {
-      const res = await this.post({
-        url: this.api.login,
-        data: {
-          useraccount:this.loginData.username,
-          loginPwd: this.loginData.password,
-          loginType: 1
-        },
-      })
-      console.log('resresresres',res)
-      if (res.retMsg == '成功') {
-        localStorage.setItem('token', res.data.token);
-        this.Toast.success(res.retMsg);
-      }
-    } catch (error) {
-      console.log(error)
-    }
+        this.$router.push({
+               path: "home",
+        })
+    //   try {
+    //   const res = await this.post({
+    //     url: this.api.login,
+    //     data: {
+    //       useraccount:this.loginData.username,
+    //       loginPwd: this.loginData.password,
+    //       loginType: 1
+    //     },
+    //   })
+    //   console.log('resresresres',res)
+    //   if (res.retMsg == '成功') {
+    //     localStorage.setItem('token', res.data.token);
+    //     this.Toast.success(res.retMsg);
+    //   }
+    // } catch (error) {
+    //   console.log(error)
+    // }
     },
     reg() {
       alert(this.isReg);
