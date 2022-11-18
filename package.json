@@ -28,7 +28,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
-    "@vue/cli-service": "^3.4.0",
+    "@vue/cli-service": "^5.0.8",
     "babel-plugin-import": "^1.8.0",
     "postcss-pxtorem": "^4.0.1",
     "less": "^3.8.1",
